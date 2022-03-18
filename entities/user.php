@@ -76,10 +76,27 @@ class User
        $stmt->bindParam(":age", $this->age);
        $stmt->bindParam(":gender", $this->gender); 
 
-       if ($stmt->execute()) {
+       try{
+           //this is the body of try
+           $stmt->execute();
+           print_r("succes is already executed");
            return true;
+           
+       } catch (PDOException $error){
+           $errorCode = json_decode($error->errorInfo[1]);
+           return print_r($errorCode);
+
+           //check if the error is duplicate
+           if($errorCode == 1062){
+               //if yes, tell the user that the email already exists
+               http_response_code(400); //set the status code to 400, client error
+               return print_r(['status' => 'false', 'message' => 'Email is already in use ']);
+           } else {
+              
+            return print_r(['status' => 'false', 'message' => 'error']);
+           }
        }
-       return false;
+
    }
    
 }
