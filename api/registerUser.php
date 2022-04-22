@@ -1,8 +1,8 @@
 <?php
 
-    ini_set('display_errors', 0);
-   ini_set('display_startup_errors', 0);
-    error_reporting(E_ALL);
+    //ini_set('display_errors', 0);
+   //ini_set('display_startup_errors', 0);
+    //error_reporting(E_ALL);
 
     
     header("Access-Control-Allow-Origin: *");
@@ -26,7 +26,7 @@
     $user->age = $data->age;
     $user->gender = $data->gender;
     
-   //call the register user functino
+   //call the register user function
 
    $user->registerUser();
    
